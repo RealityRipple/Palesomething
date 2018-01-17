@@ -1,0 +1,24 @@
+<!ENTITY palesomething.mainprefs.title "Palesomething Options">
+
+<!ENTITY palesomething.tab.names "Names">
+<!ENTITY palesomething.tab.extras "Extras">
+
+<!ENTITY palesomething.Names.label "Names">
+<!ENTITY palesomething.Names.description "Configure your name randomizer lists here.">
+
+<!ENTITY palesomething.listVendors.label "Vendors">
+<!ENTITY palesomething.listPrefixes.label "Prefixes">
+<!ENTITY palesomething.listNames.label "Names">
+
+<!ENTITY palesomething.SameName.caption "Single Name Mode">
+<!ENTITY palesomething.SameName.label "Use the same generated name for all browser windows">
+
+<!ENTITY palesomething.buttonAdd "Add">
+<!ENTITY palesomething.buttonApply "Apply">
+
+<!ENTITY palesomething.extra.ShortcutCaption "Keyboard Shortcuts">
+<!ENTITY palesomething.extra.ShortcutDescription "Keyboard shortcut Ctrl+` (grave accent) in the browser window generates a new product name.">
+<!ENTITY palesomething.extra.HiddenListsCaption "Titlebar Spacers and Comments">
+<!ENTITY palesomething.extra.HiddenListsDescription "There are two hidden preferences for randomized name-spacers and titlebar comments. The spacers go between the vendor name and the browser name, with the default value being a single space. The comments are displayed after the browser name. Both are pipe-delimited like the other lists. The preferences are as follows, and accessible through about:config:">
+<!ENTITY palesomething.extra.HiddenListsLabel1 "extensions.palesomething.lists.spacers">
+<!ENTITY palesomething.extra.HiddenListsLabel2 "extensions.palesomething.lists.comments">
