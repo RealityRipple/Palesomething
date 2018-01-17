@@ -39,7 +39,7 @@ var AboutFireSomethingService = {
 }
 
 // register
-try { AboutPaleSomethingService.register(); } catch(ex) { dump(ex+"\n"); }
+try { AboutFireSomethingService.register(); } catch(ex) { dump(ex+"\n"); }
 
 var AboutPaleSomethingService = {
 	impl: {
@@ -72,7 +72,7 @@ var AboutPaleSomethingService = {
 	register: function() {
 		var compman = Components.manager;
 		compman.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-		var cid = Components.ID('{1dd0cb48-aea3-4a52-8b29-01429a542863}');
+		var cid = Components.ID('{A6CE8B1E-3DD1-580B-B098-2E0040934D74}');
 		var contractid = "@mozilla.org/network/protocol/about;1?what=palesomething";
 		
 		if (!compman.isCIDRegistered(cid)) {
