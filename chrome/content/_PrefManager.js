@@ -59,15 +59,17 @@ PaleSomething_PrefManager.prototype =
  {
 		var strType = this.getPrefType(strName);
 		var strCode = 'this.getRootBranch().get' + strType + 'Pref("' + strName + '")';
+  if (strType == "Char")
+   strCode = 'this.getRootBranch().getComplexValue("' + strName + '", Components.interfaces.nsISupportsString).toString()';
 		try { return eval(strCode); } catch(ex) { dump(ex + "\n"); }
 		return null;
 	},
 	setPref: function(strName, varValue)
  {
 		var strType = this.getPrefType(strName);
+  var strCode = 'this.getRootBranch().set' + strType + 'Pref("' + strName + '", ' + varValue + ')';
 		if (strType == "Char")
-   varValue = '"' + varValue + '"';
-		var strCode = 'this.getRootBranch().set' + strType + 'Pref("' + strName + '", ' + varValue + ')';
+   strCode = 'this.getRootBranch().setComplexValue("' + strName + '", Components.interfaces.nsISupportsString, "' + varValue + '").toString()';
 		try { eval(strCode); } catch(ex) { dump(ex + "\n"); }
 	},
 	addPrefObserver: function(strObserver, strDomain)
