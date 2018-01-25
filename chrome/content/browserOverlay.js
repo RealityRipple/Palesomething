@@ -89,12 +89,21 @@ var paleSomething =
   var myWnd    = document.getElementById("main-window");
   if (myWnd == null)
    return;
-  if (myWnd.hasAttribute("titlemodifier"))
-   myWnd.setAttribute("titlemodifier", this.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
   if (myWnd.hasAttribute("titlemodifier_normal"))
    myWnd.setAttribute("titlemodifier_normal", this.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
-  if (myWnd.hasAttribute("titlemodifier_privatebrowsing")) 
+  if (myWnd.hasAttribute("titlemodifier_privatebrowsing"))
    myWnd.setAttribute("titlemodifier_privatebrowsing", this.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+  if (myWnd.hasAttribute("titlemodifier"))
+  {
+   if ((myWnd.hasAttribute("privatebrowsingmode") && (myWnd.getAttribute("privatebrowsingmode") == "temporary" || myWnd.getAttribute("privatebrowsingmode") == "permanent")) || (myWnd.hasAttribute("browsingmode") && myWnd.getAttribute("browsingmode") == "private"))
+   {
+    myWnd.setAttribute("titlemodifier", this.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+   }
+   else
+   {
+    myWnd.setAttribute("titlemodifier", this.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+   }
+  }
   this.updateTitlebar();
   setTimeout("paleSomething.setDelayedNames();", 100);
  },
