@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Palesomething</em:name>
   <em:id>{3B9A302B-BD28-5D2F-9C6A-5D0C6058A8AF}</em:id>
-  <em:version>2.1</em:version>
+  <em:version>2.2</em:version>
   <em:type>2</em:type>
   <!-- Pale Moon -->
   <em:targetApplication>
@@ -16,7 +16,8 @@
   <em:description>All your branding are belong to Palesomething.</em:description>
   <em:homepageURL>https://realityripple.com/Software/Mozilla-Extensions/Palesomething/</em:homepageURL>
   <em:updateURL>https://realityripple.com/Software/Mozilla-Extensions/Palesomething/update.rdf</em:updateURL>
-  <em:iconURL>chrome://palesomething/skin/icon.png</em:iconURL>
+  <em:iconURL>chrome://palesomething/skin/logo.png</em:iconURL>
+  <em:icon64URL>chrome://palesomething/skin/logo64.png</em:icon64URL>
   <em:creator>RealityRipple</em:creator>
   <em:contributor>Cosmic Cat Creations</em:contributor>
   <em:optionsURL>chrome://palesomething/content/preferences/prefwindow-Main.xul</em:optionsURL>
