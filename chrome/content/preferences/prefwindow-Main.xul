@@ -25,11 +25,11 @@
    <menupopup id="listbox-context-menu">
     <menuitem label="&deleteCmd.label;"
               accesskey="&deleteCmd.accesskey;"
-              oncommand="deleteListitems(event)"/>
+              oncommand="paleSomething_Listbox.deleteListitems(event)"/>
     <menuseparator/>
     <menuitem label="&selectAllCmd.label;"
               accesskey="&selectAllCmd.accesskey;"
-              oncommand="selectAllListitems(event)"/>
+              oncommand="paleSomething_Listbox.selectAllListitems(event)"/>
      </menupopup>
    </popupset>
   <hbox>
@@ -37,7 +37,7 @@
     <caption label="&palesomething.listVendors.label;"/>
     <hbox>
      <textbox id="addVendorText" onkeypress="processTextboxKeypress(event, 'addVendorText', 'listVendors')" flex="1"/>
-     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listVendors', 'addVendorText')" style="min-width:3em;"/>
+     <button label="&palesomething.buttonAdd;" oncommand="paleSomething_Listbox.addListitem('listVendors', 'addVendorText')" style="min-width:3em;"/>
     </hbox>
     <listbox id="listVendors" preference="prefVendorList"
              onsyncfrompreference="return convertPrefToList('listVendors');"
@@ -50,7 +50,7 @@
     <caption label="&palesomething.listPrefixes.label;"/>
     <hbox>
      <textbox id="addPrefixText" onkeypress="processTextboxKeypress(event, 'addPrefixText', 'listPrefixes')" flex="1"/>
-     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listPrefixes', 'addPrefixText')" style="min-width:3em;"/>
+     <button label="&palesomething.buttonAdd;" oncommand="paleSomething_Listbox.addListitem('listPrefixes', 'addPrefixText')" style="min-width:3em;"/>
     </hbox>
     <listbox id="listPrefixes" preference="prefPrefixList"
              onsyncfrompreference="return convertPrefToList('listPrefixes');"
@@ -62,7 +62,7 @@
     <caption label="&palesomething.listNames.label;"/>
     <hbox>
      <textbox id="addNameText"  onkeypress="processTextboxKeypress(event, 'addNameText', 'listNames')" flex="1"/>
-     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listNames', 'addNameText')" style="min-width:3em;"/>
+     <button label="&palesomething.buttonAdd;" oncommand="paleSomething_Listbox.addListitem('listNames', 'addNameText')" style="min-width:3em;"/>
     </hbox>
     <listbox id="listNames" preference="prefNameList"
              onsyncfrompreference="return convertPrefToList('listNames');"
@@ -107,7 +107,7 @@
    if (strPrefList == "")
     return "";
    listInitialized[strListboxID] = true;
-   var arrItems = strPrefList.split("|").sort(caseInsensitiveSort);
+   var arrItems = strPrefList.split("|").sort(paleSomething_Listbox.caseInsensitiveSort);
    var oItem;
    for (var i=0; i < arrItems.length; i++)
    {
@@ -123,13 +123,13 @@
   }
   function convertListToPref(strID)
   {
-   return joinList(strID);
+   return paleSomething_Listbox.joinList(strID);
   }
   function processListboxKeypress(event)
   {
    if (event.keyCode == KeyEvent.DOM_VK_DELETE)
    {
-    deleteListitems(event);
+    paleSomething_Listbox.deleteListitems(event);
     return;
    }
   }
@@ -139,7 +139,7 @@
    {
     event.preventDefault();
     event.stopPropagation();
-    addListitem(strListID, strTextboxID);
+    paleSomething_Listbox.addListitem(strListID, strTextboxID);
    }
   }
  ]]></script>
