@@ -14,133 +14,133 @@
             buttons="accept,cancel"
             ondialogaccept="return onAccept();"
             maxwidth="680">
-	<prefpane id="options-names-pane">
-		<preferences>
-			<preference id="prefVendorList" name="extensions.palesomething.lists.vendors" type="string" instantApply="false" />
-			<preference id="prefPrefixList" name="extensions.palesomething.lists.prefixes" type="string" instantApply="false" />
-			<preference id="prefNameList" name="extensions.palesomething.lists.names" type="string" instantApply="false" />
-			<preference id="prefSameName" name="extensions.palesomething.samename" type="bool" instantApply="false" />
-		</preferences>
-		<popupset>
-			<menupopup id="listbox-context-menu">
-				<menuitem label="&deleteCmd.label;"
+ <prefpane id="options-names-pane">
+  <preferences>
+   <preference id="prefVendorList" name="extensions.palesomething.lists.vendors" type="string" instantApply="false" />
+   <preference id="prefPrefixList" name="extensions.palesomething.lists.prefixes" type="string" instantApply="false" />
+   <preference id="prefNameList" name="extensions.palesomething.lists.names" type="string" instantApply="false" />
+   <preference id="prefSameName" name="extensions.palesomething.samename" type="bool" instantApply="false" />
+  </preferences>
+  <popupset>
+   <menupopup id="listbox-context-menu">
+    <menuitem label="&deleteCmd.label;"
               accesskey="&deleteCmd.accesskey;"
               oncommand="deleteListitems(event)"/>
-				<menuseparator/>
-				<menuitem label="&selectAllCmd.label;"
+    <menuseparator/>
+    <menuitem label="&selectAllCmd.label;"
               accesskey="&selectAllCmd.accesskey;"
               oncommand="selectAllListitems(event)"/>
-	    </menupopup>
-	  </popupset>
-		<hbox>
-			<groupbox flex="1">
-				<caption label="&palesomething.listVendors.label;"/>
-				<hbox>
-					<textbox id="addVendorText" onkeypress="processTextboxKeypress(event, 'addVendorText', 'listVendors')" flex="1"/>
-					<button label="&palesomething.buttonAdd;"	oncommand="addListitem('listVendors', 'addVendorText')"	style="min-width:3em;"/>
-				</hbox>
-				<listbox id="listVendors" preference="prefVendorList"
+     </menupopup>
+   </popupset>
+  <hbox>
+   <groupbox flex="1">
+    <caption label="&palesomething.listVendors.label;"/>
+    <hbox>
+     <textbox id="addVendorText" onkeypress="processTextboxKeypress(event, 'addVendorText', 'listVendors')" flex="1"/>
+     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listVendors', 'addVendorText')" style="min-width:3em;"/>
+    </hbox>
+    <listbox id="listVendors" preference="prefVendorList"
              onsyncfrompreference="return convertPrefToList('listVendors');"
              onsynctopreference="return convertListToPref('listVendors');"
              onchange="dump('listVendors changed\n');"
              rows="7" seltype="multiple" context="listbox-context-menu" flex="1">
-				</listbox>
-			</groupbox>
-			<groupbox flex="1">
-				<caption label="&palesomething.listPrefixes.label;"/>
-				<hbox>
-					<textbox id="addPrefixText"	onkeypress="processTextboxKeypress(event, 'addPrefixText', 'listPrefixes')" flex="1"/>
-					<button label="&palesomething.buttonAdd;"	oncommand="addListitem('listPrefixes', 'addPrefixText')"	style="min-width:3em;"/>
-				</hbox>
-				<listbox id="listPrefixes" preference="prefPrefixList"
+    </listbox>
+   </groupbox>
+   <groupbox flex="1">
+    <caption label="&palesomething.listPrefixes.label;"/>
+    <hbox>
+     <textbox id="addPrefixText" onkeypress="processTextboxKeypress(event, 'addPrefixText', 'listPrefixes')" flex="1"/>
+     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listPrefixes', 'addPrefixText')" style="min-width:3em;"/>
+    </hbox>
+    <listbox id="listPrefixes" preference="prefPrefixList"
              onsyncfrompreference="return convertPrefToList('listPrefixes');"
              onsynctopreference="return convertListToPref('listPrefixes');"
              rows="7" seltype="multiple" context="listbox-context-menu" flex="1">
-				</listbox>
-			</groupbox>
-			<groupbox flex="1">
-				<caption label="&palesomething.listNames.label;"/>
-				<hbox>
-					<textbox id="addNameText"		onkeypress="processTextboxKeypress(event, 'addNameText', 'listNames')" flex="1"/>
-					<button label="&palesomething.buttonAdd;"	oncommand="addListitem('listNames', 'addNameText')"	style="min-width:3em;"/>
-				</hbox>
-				<listbox id="listNames" preference="prefNameList"
+    </listbox>
+   </groupbox>
+   <groupbox flex="1">
+    <caption label="&palesomething.listNames.label;"/>
+    <hbox>
+     <textbox id="addNameText"  onkeypress="processTextboxKeypress(event, 'addNameText', 'listNames')" flex="1"/>
+     <button label="&palesomething.buttonAdd;" oncommand="addListitem('listNames', 'addNameText')" style="min-width:3em;"/>
+    </hbox>
+    <listbox id="listNames" preference="prefNameList"
              onsyncfrompreference="return convertPrefToList('listNames');"
              onsynctopreference="return convertListToPref('listNames');"
              rows="7" seltype="multiple" context="listbox-context-menu" flex="1">
-				</listbox>
-			</groupbox>
-		</hbox>
-		<groupbox>
-			<caption label="&palesomething.extra.HiddenListsCaption;"/>
-			<description>&palesomething.extra.HiddenListsDescription;</description>
-			<label>&palesomething.extra.HiddenListsLabel1;</label>
-			<label>&palesomething.extra.HiddenListsLabel2;</label>
-		</groupbox>
-		<groupbox>
-			<caption label="&palesomething.SameName.caption;"/>
-			<hbox>
-				<checkbox id="samename" preference="prefSameName" label="&palesomething.SameName.label;"/>
-				<spacer flex="1"/>
-			</hbox>
-		</groupbox>
-		<groupbox>
-			<caption label="&palesomething.extra.ShortcutCaption;"/>
-			<description>&palesomething.extra.ShortcutDescription;</description>
-		</groupbox>
+    </listbox>
+   </groupbox>
+  </hbox>
+  <groupbox>
+   <caption label="&palesomething.extra.HiddenListsCaption;"/>
+   <description>&palesomething.extra.HiddenListsDescription;</description>
+   <label>&palesomething.extra.HiddenListsLabel1;</label>
+   <label>&palesomething.extra.HiddenListsLabel2;</label>
+  </groupbox>
+  <groupbox>
+   <caption label="&palesomething.SameName.caption;"/>
+   <hbox>
+    <checkbox id="samename" preference="prefSameName" label="&palesomething.SameName.label;"/>
+    <spacer flex="1"/>
+   </hbox>
+  </groupbox>
+  <groupbox>
+   <caption label="&palesomething.extra.ShortcutCaption;"/>
+   <description>&palesomething.extra.ShortcutDescription;</description>
+  </groupbox>
   <spacer height="50"/>
-	</prefpane>
-	<script type="application/x-javascript" src="chrome://palesomething/content/preferences/listboxFunctions.js"/>
-	<script type="application/x-javascript"><![CDATA[
-		function onAccept()
+ </prefpane>
+ <script type="application/x-javascript" src="chrome://palesomething/content/preferences/listboxFunctions.js"/>
+ <script type="application/x-javascript"><![CDATA[
+  function onAccept()
   {
-			document.getElementById("options-names-pane").writePreferences();
-			return true;
-		}
-		var listInitialized = new Array();
-		function convertPrefToList(strListboxID)
+   document.getElementById("options-names-pane").writePreferences();
+   return true;
+  }
+  var listInitialized = new Array();
+  function convertPrefToList(strListboxID)
   {
-			if (listInitialized[strListboxID])
+   if (listInitialized[strListboxID])
     return "";
-			var hListbox = document.getElementById(strListboxID);
-			var strPrefList = document.getElementById(hListbox.getAttribute("preference")).value;
-			if (strPrefList == "")
+   var hListbox = document.getElementById(strListboxID);
+   var strPrefList = document.getElementById(hListbox.getAttribute("preference")).value;
+   if (strPrefList == "")
     return "";
-			listInitialized[strListboxID] = true;
-			var arrItems = strPrefList.split("|").sort(caseInsensitiveSort);
-			var oItem;
-			for (var i=0; i < arrItems.length; i++)
+   listInitialized[strListboxID] = true;
+   var arrItems = strPrefList.split("|").sort(caseInsensitiveSort);
+   var oItem;
+   for (var i=0; i < arrItems.length; i++)
    {
-				if (arrItems[i] != "")
+    if (arrItems[i] != "")
     {
-					oItem = hListbox.appendItem(arrItems[i], arrItems[i]);
-					if (i < 7)
+     oItem = hListbox.appendItem(arrItems[i], arrItems[i]);
+     if (i < 7)
       hListbox.ensureIndexIsVisible(oItem); // workaround for painting bug
-				}
-			}
-			hListbox.addEventListener("keypress", processListboxKeypress, true);
-			return "";
-		}
-		function convertListToPref(strID)
+    }
+   }
+   hListbox.addEventListener("keypress", processListboxKeypress, true);
+   return "";
+  }
+  function convertListToPref(strID)
   {
-			return joinList(strID);
-		}
-		function processListboxKeypress(event)
+   return joinList(strID);
+  }
+  function processListboxKeypress(event)
   {
-			if (event.keyCode == KeyEvent.DOM_VK_DELETE)
+   if (event.keyCode == KeyEvent.DOM_VK_DELETE)
    {
-				deleteListitems(event);
-				return;
-			}
-		}
-		function processTextboxKeypress(event, strTextboxID, strListID)
+    deleteListitems(event);
+    return;
+   }
+  }
+  function processTextboxKeypress(event, strTextboxID, strListID)
   {
-			if (event.keyCode == KeyEvent.DOM_VK_RETURN)
+   if (event.keyCode == KeyEvent.DOM_VK_RETURN)
    {
-				event.preventDefault();
-				event.stopPropagation();
-				addListitem(strListID, strTextboxID);
-			}
-		}
-	]]></script>
+    event.preventDefault();
+    event.stopPropagation();
+    addListitem(strListID, strTextboxID);
+   }
+  }
+ ]]></script>
 </prefwindow>

@@ -7,12 +7,12 @@
 
 var paleSomething =
 {
-	init: function()
+ init: function()
  {
-		this.Prefs = new PaleSomething_PrefManager();
+  this.Prefs = new PaleSomething_PrefManager();
   if (document.getElementById("main-window") != null)
   {
- 		this.DefaultName = document.getElementById("main-window").getAttribute("title_normal");
+   this.DefaultName = document.getElementById("main-window").getAttribute("title_normal");
    this.PrivateName = document.getElementById("main-window").getAttribute("title_privatebrowsing");
   }
   else
@@ -21,10 +21,10 @@ var paleSomething =
    this.PrivateName = this.DefaultName;
   }
   var bSameName = this.getPref("extensions.palesomething.samename");
-		if (bSameName)
+  if (bSameName)
   {
-			var arrWin = this.getOtherWindows();
-			if (arrWin.length > 0)
+   var arrWin = this.getOtherWindows();
+   if (arrWin.length > 0)
    {
     var oFS = arrWin[0].paleSomething;
     this.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <overlay id="palesomething-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://palesomething/content/_PrefManager.js"/>
-	<script type="application/x-javascript" src="chrome://palesomething/content/browserOverlay.js"/>
-	<script type="application/x-javascript" src="chrome://palesomething/content/book_of_mozilla/registerExcerpts.js"/>
-	<commandset id="mainCommandSet">
-		<command id="cmd_palesomethingRefresh" oncommand="paleSomething.setNames();"/>
-	</commandset>
-	<keyset id="mainKeyset">
-		<key id="key_palesomethingRefresh" key="`" command="cmd_palesomethingRefresh" modifiers="accel"/>
-	</keyset>
+ <script type="application/x-javascript" src="chrome://palesomething/content/_PrefManager.js"/>
+ <script type="application/x-javascript" src="chrome://palesomething/content/browserOverlay.js"/>
+ <script type="application/x-javascript" src="chrome://palesomething/content/book_of_mozilla/registerExcerpts.js"/>
+ <commandset id="mainCommandSet">
+  <command id="cmd_palesomethingRefresh" oncommand="paleSomething.setNames();"/>
+ </commandset>
+ <keyset id="mainKeyset">
+  <key id="key_palesomethingRefresh" key="`" command="cmd_palesomethingRefresh" modifiers="accel"/>
+ </keyset>
 </overlay>
