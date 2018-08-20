@@ -26,12 +26,12 @@ var paleSomething_Listbox =
   if (hTextbox.value != "")
   {
    hListbox.clearSelection();
-   var index = this.findAlphaInsertionPoint(hListbox, hTextbox.value);
+   var index = paleSomething_Listbox.findAlphaInsertionPoint(hListbox, hTextbox.value);
    if (index >= 0)
     oItem = hListbox.insertItemAt(index, hTextbox.value, hTextbox.value);
    else
     oItem = hListbox.appendItem(hTextbox.value, hTextbox.value);
-   this.centerListitem(hListbox, oItem);
+   paleSomething_Listbox.centerListitem(hListbox, oItem);
    hListbox.selectItem(oItem);
    hListbox.doCommand();
   }
@@ -101,7 +101,7 @@ var paleSomething_Listbox =
  },
  deleteListitems: function(event)
  {
-  var hListbox = this.getListbox(event);
+  var hListbox = paleSomething_Listbox.getListbox(event);
   if (!hListbox)
    return;
   while (hListbox.selectedCount)
@@ -110,7 +110,7 @@ var paleSomething_Listbox =
  },
  selectAllListitems: function(event)
  {
-  var hListbox = this.getListbox(event);
+  var hListbox = paleSomething_Listbox.getListbox(event);
   if (!hListbox)
    return;
   hListbox.selectAll();

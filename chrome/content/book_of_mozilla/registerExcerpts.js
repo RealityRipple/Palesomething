@@ -2,20 +2,20 @@ var AboutFireSomethingService = {
  impl: {
   ioService: null,
   newChannel: function(aURI, aLoadInfo) {
-   if (!this.ioService)
-    this.ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+   if (!AboutFireSomethingService.ioService)
+    AboutFireSomethingService.ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
    var vc = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
    var ai = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
    var chan;
    if (vc.compare(ai.version, "27.*") > 0)
    {
-    var uri = this.ioService.newURI("chrome://palesomething/content/book_of_mozilla/firesomething.xhtml", null, null);
-    chan = this.ioService.newChannelFromURIWithLoadInfo(uri, aLoadInfo);
+    var uri = AboutFireSomethingService.ioService.newURI("chrome://palesomething/content/book_of_mozilla/firesomething.xhtml", null, null);
+    chan = AboutFireSomethingService.ioService.newChannelFromURIWithLoadInfo(uri, aLoadInfo);
     chan.originalURI = aURI;
    }
    else
    {
-    chan = this.ioService.newChannel("chrome://palesomething/content/book_of_mozilla/firesomething.xhtml", null, aURI);
+    chan = AboutFireSomethingService.ioService.newChannel("chrome://palesomething/content/book_of_mozilla/firesomething.xhtml", null, aURI);
    }
    return chan;
   },
@@ -60,20 +60,20 @@ var AboutPaleSomethingService = {
  impl: {
   ioService: null,
   newChannel: function(aURI, aLoadInfo) {
-   if (!this.ioService)
-    this.ioService = Components.classes["@mozilla.org/network/io-service;1"]
+   if (!AboutPaleSomethingService.ioService)
+    AboutPaleSomethingService.ioService = Components.classes["@mozilla.org/network/io-service;1"]
         .getService(Components.interfaces.nsIIOService);
    var vc = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
    var ai = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
    var chan;
    if (vc.compare(ai.version, "27.*") > 0)
    {
-    var uri = this.ioService.newURI("chrome://palesomething/content/book_of_mozilla/palesomething.xhtml", null, null);
-    chan = this.ioService.newChannelFromURIWithLoadInfo(uri, aLoadInfo);
+    var uri = AboutPaleSomethingService.ioService.newURI("chrome://palesomething/content/book_of_mozilla/palesomething.xhtml", null, null);
+    chan = AboutPaleSomethingService.ioService.newChannelFromURIWithLoadInfo(uri, aLoadInfo);
     chan.originalURI = aURI;
    }
    else
-    chan = this.ioService.newChannel("chrome://palesomething/content/book_of_mozilla/palesomething.xhtml", null, uri);
+    chan = AboutPaleSomethingService.ioService.newChannel("chrome://palesomething/content/book_of_mozilla/palesomething.xhtml", null, uri);
    return chan;
   },
   QueryInterface: function(iid) {

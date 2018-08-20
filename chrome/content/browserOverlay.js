@@ -9,111 +9,116 @@ var paleSomething =
 {
  init: function()
  {
-  this.Prefs = new PaleSomething_PrefManager();
   if (document.getElementById("main-window") != null)
   {
-   this.DefaultName = document.getElementById("main-window").getAttribute("title_normal");
-   this.PrivateName = document.getElementById("main-window").getAttribute("title_privatebrowsing");
+   paleSomething.DefaultName = document.getElementById("main-window").getAttribute("title_normal");
+   paleSomething.PrivateName = document.getElementById("main-window").getAttribute("title_privatebrowsing");
   }
   else
   {
-   this.DefaultName = "Unknown";
-   this.PrivateName = this.DefaultName;
+   paleSomething.DefaultName = "Unknown";
+   paleSomething.PrivateName = paleSomething.DefaultName;
   }
-  var bSameName = this.getPref("extensions.palesomething.samename");
+  var bSameName = paleSomething.getPref("extensions.palesomething.samename");
   if (bSameName)
   {
-   var arrWin = this.getOtherWindows();
+   var arrWin = paleSomething.getOtherWindows();
    if (arrWin.length > 0)
    {
     var oFS = arrWin[0].paleSomething;
-    this.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);
+    paleSomething.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);
    }
    else
    {
-    this.setNames();
+    paleSomething.setNames();
    }
   }
   else
   {
-   this.setNames();
+   paleSomething.setNames();
   }
-  this.Prefs.addPrefObserver("paleSomething.prefObserver");
+  paleSomething_PrefManager.addPrefObserver("paleSomething.prefObserver");
  },
  init2: function()
  {
   if (document.getElementById("content") != null)
   {
    document.getElementById("content").addEventListener("DOMTitleChanged", paleSomething.updateTitlebar, false);  // footnote "DOMTitle"
-   this.updateTitlebar();
+   paleSomething.updateTitlebar();
   }
   if (document.getElementById("aboutName") != null)
   {
-   this.DefaultAbout = document.getElementById("aboutName").getAttribute("label");
+   paleSomething.DefaultAbout = document.getElementById("aboutName").getAttribute("label");
    setTimeout("paleSomething.setDelayedNames();", 100);
   }
  },
  destruct: function()
  {
-  try { this.Prefs.removePrefObserver(); } catch(ex) {}
+  try
+  {
+   paleSomething_PrefManager.removePrefObserver();
+  }
+  catch(ex)
+  {
+  }
  },
  getPref: function(strName)
  {
-  return this.Prefs.getPref(strName);
+  return paleSomething_PrefManager.getPref(strName);
  },
  prefObserver: function(subject, topic, prefName)
  {
-  this.setNames();
+  paleSomething.setNames();
  },
  setNames: function()
  {
-  var bSameName = this.getPref("extensions.palesomething.samename");
-  var bTopWin = (window == this.getWM().getMostRecentWindow(null));
+  var bSameName = paleSomething.getPref("extensions.palesomething.samename");
+  var bTopWin = (window == paleSomething.getWM().getMostRecentWindow(null));
   if (bSameName && !bTopWin)
    return;
-  var vendor  = this.getRandomName("extensions.palesomething.lists.vendors");
-  var spacer  = this.getRandomName("extensions.palesomething.lists.spacers");
-  var prefix  = this.getRandomName("extensions.palesomething.lists.prefixes");
-  var suffix  = this.getRandomName("extensions.palesomething.lists.names");
-  var comment = this.getRandomName("extensions.palesomething.lists.comments");
-  this.setNewBrowserName(vendor + spacer, prefix + suffix, comment);
+  var vendor  = paleSomething.getRandomName("extensions.palesomething.lists.vendors");
+  var spacer  = paleSomething.getRandomName("extensions.palesomething.lists.spacers");
+  var prefix  = paleSomething.getRandomName("extensions.palesomething.lists.prefixes");
+  var suffix  = paleSomething.getRandomName("extensions.palesomething.lists.names");
+  var comment = paleSomething.getRandomName("extensions.palesomething.lists.comments");
+  paleSomething.setNewBrowserName(vendor + spacer, prefix + suffix, comment);
   if (bSameName)
-   this.updateOtherWindows();
+   paleSomething.updateOtherWindows();
  },
  setNewBrowserName: function(strVendor, strShortName, strTitleComment)
  {
-  this.Vendor = strVendor;
-  this.ShortName = strShortName;
-  this.TitleComment = strTitleComment;
-  var myRegExp = new RegExp(this.DefaultName, "");
+  paleSomething.Vendor = strVendor;
+  paleSomething.ShortName = strShortName;
+  paleSomething.TitleComment = strTitleComment;
+  var myRegExp = new RegExp(paleSomething.DefaultName, "");
   var myWnd    = document.getElementById("main-window");
   if (myWnd == null)
    return;
   if (myWnd.hasAttribute("titlemodifier_normal"))
-   myWnd.setAttribute("titlemodifier_normal", this.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+   myWnd.setAttribute("titlemodifier_normal", paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
   if (myWnd.hasAttribute("titlemodifier_privatebrowsing"))
-   myWnd.setAttribute("titlemodifier_privatebrowsing", this.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+   myWnd.setAttribute("titlemodifier_privatebrowsing", paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
   if (myWnd.hasAttribute("titlemodifier"))
   {
    if ((myWnd.hasAttribute("privatebrowsingmode") && (myWnd.getAttribute("privatebrowsingmode") == "temporary" || myWnd.getAttribute("privatebrowsingmode") == "permanent")) || (myWnd.hasAttribute("browsingmode") && myWnd.getAttribute("browsingmode") == "private"))
    {
-    myWnd.setAttribute("titlemodifier", this.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+    myWnd.setAttribute("titlemodifier", paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
    }
    else
    {
-    myWnd.setAttribute("titlemodifier", this.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+    myWnd.setAttribute("titlemodifier", paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
    }
   }
-  this.updateTitlebar();
+  paleSomething.updateTitlebar();
   setTimeout("paleSomething.setDelayedNames();", 100);
  },
  setDelayedNames: function()
  {
   try
   {
-   this.updateTitlebar();
-   var myRegExp = new RegExp(this.DefaultName, "");
-   var strAbout = this.DefaultAbout.replace(myRegExp, this.Vendor + this.ShortName);
+   paleSomething.updateTitlebar();
+   var myRegExp = new RegExp(paleSomething.DefaultName, "");
+   var strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
    document.getElementById("aboutName").setAttribute("label", strAbout);
   } catch(ex) { dump(ex + "\n"); }
  },
@@ -123,15 +128,15 @@ var paleSomething =
  },
  updateOtherWindows: function()
  {
-  var arrWin = this.getOtherWindows();
+  var arrWin = paleSomething.getOtherWindows();
   for (var i=0; i < arrWin.length; i++) {
-   try { arrWin[i].paleSomething.setNewBrowserName(this.Vendor, this.ShortName, this.TitleComment); } catch(ex) { dump(ex + "\n"); }
+   try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { dump(ex + "\n"); }
   }
  },
  getOtherWindows: function()
  {
   var hWin, arrWin = new Array();
-  var e = this.getWM().getEnumerator(null);
+  var e = paleSomething.getWM().getEnumerator(null);
   while (e.hasMoreElements())
   {
    hWin = e.getNext();
@@ -148,8 +153,8 @@ var paleSomething =
  },
  getRandomName: function(strPref)
  {
-  var arrNames = this.getPref(strPref).split("|");
-  return arrNames[this.getRandom(0, arrNames.length - 1)];
+  var arrNames = paleSomething.getPref(strPref).split("|");
+  return arrNames[paleSomething.getRandom(0, arrNames.length - 1)];
  },
  getRandom: function(min, max)
  {

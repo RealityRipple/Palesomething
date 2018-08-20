@@ -5,13 +5,9 @@
 // For licensing terms, please refer to readme.txt in this extension's XPInstall 
 // package or its installation directory on your computer.
 
-function PaleSomething_PrefManager()
+var paleSomething_PrefManager =
 {
- this.domain = "extensions.palesomething";
- return this;
-}
-PaleSomething_PrefManager.prototype =
-{
+ domain: "extensions.palesomething",
  getService: function()
  {
   try
@@ -23,24 +19,24 @@ PaleSomething_PrefManager.prototype =
  {
   try
   {
-   return this.getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+   return paleSomething_PrefManager.getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
   } catch(ex) { dump(ex + "\n"); return null; }
  },
  rootBranch: null,
  getRootBranch: function()
  {
-  if (!this.rootBranch)
-   this.rootBranch = this.getService().getBranch(null);
-  return this.rootBranch;
+  if (!paleSomething_PrefManager.rootBranch)
+   paleSomething_PrefManager.rootBranch = paleSomething_PrefManager.getService().getBranch(null);
+  return paleSomething_PrefManager.rootBranch;
  },
  prefTypes: new Array(),
  getPrefType: function(strName)
  {
-  if (strName in this.prefTypes)
-   return this.prefTypes[strName];
+  if (strName in paleSomething_PrefManager.prefTypes)
+   return paleSomething_PrefManager.prefTypes[strName];
   var strType = "Char";
   var iPB = Components.interfaces.nsIPrefBranch;
-  switch (this.getRootBranch().getPrefType(strName))
+  switch (paleSomething_PrefManager.getRootBranch().getPrefType(strName))
   {
    case iPB.PREF_STRING:
     strType = "Char";
@@ -52,38 +48,38 @@ PaleSomething_PrefManager.prototype =
     strType = "Bool";
     break;
   }
-  this.prefTypes[strName] = strType;
+  paleSomething_PrefManager.prefTypes[strName] = strType;
   return strType;
  },
  getPref: function(strName)
  {
-  var strType = this.getPrefType(strName);
-  var strCode = 'this.getRootBranch().get' + strType + 'Pref("' + strName + '")';
+  var strType = paleSomething_PrefManager.getPrefType(strName);
+  var strCode = 'paleSomething_PrefManager.getRootBranch().get' + strType + 'Pref("' + strName + '")';
   if (strType == "Char")
-   strCode = 'this.getRootBranch().getComplexValue("' + strName + '", Components.interfaces.nsISupportsString).toString()';
+   strCode = 'paleSomething_PrefManager.getRootBranch().getComplexValue("' + strName + '", Components.interfaces.nsISupportsString).toString()';
   try { return eval(strCode); } catch(ex) { dump(ex + "\n"); }
   return null;
  },
  setPref: function(strName, varValue)
  {
-  var strType = this.getPrefType(strName);
-  var strCode = 'this.getRootBranch().set' + strType + 'Pref("' + strName + '", ' + varValue + ')';
+  var strType = paleSomething_PrefManager.getPrefType(strName);
+  var strCode = 'paleSomething_PrefManager.getRootBranch().set' + strType + 'Pref("' + strName + '", ' + varValue + ')';
   if (strType == "Char")
-   strCode = 'this.getRootBranch().setComplexValue("' + strName + '", Components.interfaces.nsISupportsString, "' + varValue + '").toString()';
+   strCode = 'paleSomething_PrefManager.getRootBranch().setComplexValue("' + strName + '", Components.interfaces.nsISupportsString, "' + varValue + '").toString()';
   try { eval(strCode); } catch(ex) { dump(ex + "\n"); }
  },
  addPrefObserver: function(strObserver, strDomain)
  {
-  this.observer = strObserver;
-  this.obsDomain = (strDomain == "root") ? "" : this.domain;
-  try { this.getInterface().addObserver(this.obsDomain, this, false); } catch(ex) { dump(ex + "\n"); }
+  paleSomething_PrefManager.observer = strObserver;
+  paleSomething_PrefManager.obsDomain = (strDomain == "root") ? "" : paleSomething_PrefManager.domain;
+  try { paleSomething_PrefManager.getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false); } catch(ex) { dump(ex + "\n"); }
  },
  removePrefObserver: function()
  {
-  try { this.getInterface().removeObserver(this.obsDomain, this); } catch(ex) { dump(ex + "\n"); }
+  try { paleSomething_PrefManager.getInterface().removeObserver(paleSomething_PrefManager.obsDomain, this); } catch(ex) { dump(ex + "\n"); }
  },
  observe: function(subject, topic, prefName) 
  {
-  try { eval(this.observer + "(subject, topic, prefName);"); } catch(ex) { dump(ex + "\n"); }
+  try { eval(paleSomething_PrefManager.observer + "(subject, topic, prefName);"); } catch(ex) { dump(ex + "\n"); }
  }
-}
+};
