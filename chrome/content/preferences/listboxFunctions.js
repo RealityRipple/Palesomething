@@ -26,19 +26,19 @@ var paleSomething_Listbox =
   if (hTextbox.value != "")
   {
    hListbox.clearSelection();
-   var index = paleSomething_Listbox.findAlphaInsertionPoint(hListbox, hTextbox.value);
+   var index = paleSomething_Listbox._findAlphaInsertionPoint(hListbox, hTextbox.value);
    if (index >= 0)
     oItem = hListbox.insertItemAt(index, hTextbox.value, hTextbox.value);
    else
     oItem = hListbox.appendItem(hTextbox.value, hTextbox.value);
-   paleSomething_Listbox.centerListitem(hListbox, oItem);
+   paleSomething_Listbox._centerListitem(hListbox, oItem);
    hListbox.selectItem(oItem);
    hListbox.doCommand();
   }
   hTextbox.value = "";
   hTextbox.focus();
  },
- centerListitem: function(hListbox, oItem)
+ _centerListitem: function(hListbox, oItem)
  {
   var i, oTemp = oItem;
   for (i=0; i < 3; i++)
@@ -55,7 +55,7 @@ var paleSomething_Listbox =
   }
   hListbox.ensureElementIsVisible(oTemp);
  },
- findAlphaInsertionPoint: function(hListbox, strValue)
+ _findAlphaInsertionPoint: function(hListbox, strValue)
  {
   if (!hListbox.lastChild)
    return -1;
@@ -101,7 +101,7 @@ var paleSomething_Listbox =
  },
  deleteListitems: function(event)
  {
-  var hListbox = paleSomething_Listbox.getListbox(event);
+  var hListbox = paleSomething_Listbox._getListbox(event);
   if (!hListbox)
    return;
   while (hListbox.selectedCount)
@@ -110,12 +110,12 @@ var paleSomething_Listbox =
  },
  selectAllListitems: function(event)
  {
-  var hListbox = paleSomething_Listbox.getListbox(event);
+  var hListbox = paleSomething_Listbox._getListbox(event);
   if (!hListbox)
    return;
   hListbox.selectAll();
  },
- getListbox: function(event)
+ _getListbox: function(event)
  {
   var hListbox;
   switch (event.target.nodeName)

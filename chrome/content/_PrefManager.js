@@ -7,33 +7,33 @@
 
 var paleSomething_PrefManager =
 {
- domain: "extensions.palesomething",
- getService: function()
+ _domain: "extensions.palesomething",
+ _getService: function()
  {
   try
   {
    return Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
   } catch(ex) { dump(ex + "\n"); return null; }
  },
- getInterface: function()
+ _getInterface: function()
  {
   try
   {
-   return paleSomething_PrefManager.getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+   return paleSomething_PrefManager._getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
   } catch(ex) { dump(ex + "\n"); return null; }
  },
- rootBranch: null,
+ _rootBranch: null,
  getRootBranch: function()
  {
-  if (!paleSomething_PrefManager.rootBranch)
-   paleSomething_PrefManager.rootBranch = paleSomething_PrefManager.getService().getBranch(null);
-  return paleSomething_PrefManager.rootBranch;
+  if (!paleSomething_PrefManager._rootBranch)
+   paleSomething_PrefManager._rootBranch = paleSomething_PrefManager._getService().getBranch(null);
+  return paleSomething_PrefManager._rootBranch;
  },
- prefTypes: new Array(),
+ _prefTypes: new Array(),
  getPrefType: function(strName)
  {
-  if (strName in paleSomething_PrefManager.prefTypes)
-   return paleSomething_PrefManager.prefTypes[strName];
+  if (strName in paleSomething_PrefManager._prefTypes)
+   return paleSomething_PrefManager._prefTypes[strName];
   var strType = "Char";
   var iPB = Components.interfaces.nsIPrefBranch;
   switch (paleSomething_PrefManager.getRootBranch().getPrefType(strName))
@@ -48,7 +48,7 @@ var paleSomething_PrefManager =
     strType = "Bool";
     break;
   }
-  paleSomething_PrefManager.prefTypes[strName] = strType;
+  paleSomething_PrefManager._prefTypes[strName] = strType;
   return strType;
  },
  getPref: function(strName)
@@ -71,12 +71,12 @@ var paleSomething_PrefManager =
  addPrefObserver: function(strObserver, strDomain)
  {
   paleSomething_PrefManager.observer = strObserver;
-  paleSomething_PrefManager.obsDomain = (strDomain == "root") ? "" : paleSomething_PrefManager.domain;
-  try { paleSomething_PrefManager.getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false); } catch(ex) { dump(ex + "\n"); }
+  paleSomething_PrefManager.obsDomain = (strDomain == "root") ? "" : paleSomething_PrefManager._domain;
+  try { paleSomething_PrefManager._getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false); } catch(ex) { dump(ex + "\n"); }
  },
  removePrefObserver: function()
  {
-  try { paleSomething_PrefManager.getInterface().removeObserver(paleSomething_PrefManager.obsDomain, this); } catch(ex) { dump(ex + "\n"); }
+  try { paleSomething_PrefManager._getInterface().removeObserver(paleSomething_PrefManager.obsDomain, this); } catch(ex) { dump(ex + "\n"); }
  },
  observe: function(subject, topic, prefName) 
  {

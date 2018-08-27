@@ -19,10 +19,10 @@ var paleSomething =
    paleSomething.DefaultName = "Unknown";
    paleSomething.PrivateName = paleSomething.DefaultName;
   }
-  var bSameName = paleSomething.getPref("extensions.palesomething.samename");
+  var bSameName = paleSomething._getPref("extensions.palesomething.samename");
   if (bSameName)
   {
-   var arrWin = paleSomething.getOtherWindows();
+   var arrWin = paleSomething._getOtherWindows();
    if (arrWin.length > 0)
    {
     var oFS = arrWin[0].paleSomething;
@@ -62,7 +62,7 @@ var paleSomething =
   {
   }
  },
- getPref: function(strName)
+ _getPref: function(strName)
  {
   return paleSomething_PrefManager.getPref(strName);
  },
@@ -72,18 +72,18 @@ var paleSomething =
  },
  setNames: function()
  {
-  var bSameName = paleSomething.getPref("extensions.palesomething.samename");
-  var bTopWin = (window == paleSomething.getWM().getMostRecentWindow(null));
+  var bSameName = paleSomething._getPref("extensions.palesomething.samename");
+  var bTopWin = (window == paleSomething._getWM().getMostRecentWindow(null));
   if (bSameName && !bTopWin)
    return;
-  var vendor  = paleSomething.getRandomName("extensions.palesomething.lists.vendors");
-  var spacer  = paleSomething.getRandomName("extensions.palesomething.lists.spacers");
-  var prefix  = paleSomething.getRandomName("extensions.palesomething.lists.prefixes");
-  var suffix  = paleSomething.getRandomName("extensions.palesomething.lists.names");
-  var comment = paleSomething.getRandomName("extensions.palesomething.lists.comments");
+  var vendor  = paleSomething._getRandomName("extensions.palesomething.lists.vendors");
+  var spacer  = paleSomething._getRandomName("extensions.palesomething.lists.spacers");
+  var prefix  = paleSomething._getRandomName("extensions.palesomething.lists.prefixes");
+  var suffix  = paleSomething._getRandomName("extensions.palesomething.lists.names");
+  var comment = paleSomething._getRandomName("extensions.palesomething.lists.comments");
   paleSomething.setNewBrowserName(vendor + spacer, prefix + suffix, comment);
   if (bSameName)
-   paleSomething.updateOtherWindows();
+   paleSomething._updateOtherWindows();
  },
  setNewBrowserName: function(strVendor, strShortName, strTitleComment)
  {
@@ -126,17 +126,17 @@ var paleSomething =
  {
   try { document.getElementById("content").updateTitlebar(); } catch(ex) {}
  },
- updateOtherWindows: function()
+ _updateOtherWindows: function()
  {
-  var arrWin = paleSomething.getOtherWindows();
+  var arrWin = paleSomething._getOtherWindows();
   for (var i=0; i < arrWin.length; i++) {
    try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { dump(ex + "\n"); }
   }
  },
- getOtherWindows: function()
+ _getOtherWindows: function()
  {
   var hWin, arrWin = new Array();
-  var e = paleSomething.getWM().getEnumerator(null);
+  var e = paleSomething._getWM().getEnumerator(null);
   while (e.hasMoreElements())
   {
    hWin = e.getNext();
@@ -147,16 +147,16 @@ var paleSomething =
   }
   return arrWin;
  },
- getWM: function()
+ _getWM: function()
  {
   return Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
  },
- getRandomName: function(strPref)
+ _getRandomName: function(strPref)
  {
-  var arrNames = paleSomething.getPref(strPref).split("|");
-  return arrNames[paleSomething.getRandom(0, arrNames.length - 1)];
+  var arrNames = paleSomething._getPref(strPref).split("|");
+  return arrNames[paleSomething._getRandom(0, arrNames.length - 1)];
  },
- getRandom: function(min, max)
+ _getRandom: function(min, max)
  {
   min = parseInt(min); max = parseInt(max);
   return Math.floor((max - min) * Math.random()) + min;
