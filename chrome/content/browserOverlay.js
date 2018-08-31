@@ -7,6 +7,7 @@
 
 var paleSomething =
 {
+ DefaultAbout: null,
  init: function()
  {
   if (document.getElementById("main-window") != null)
@@ -49,7 +50,7 @@ var paleSomething =
   if (document.getElementById("aboutName") != null)
   {
    paleSomething.DefaultAbout = document.getElementById("aboutName").getAttribute("label");
-   setTimeout("paleSomething.setDelayedNames();", 100);
+   setTimeout(paleSomething.setDelayedNames, 100);
   }
  },
  destruct: function()
@@ -110,17 +111,16 @@ var paleSomething =
    }
   }
   paleSomething.updateTitlebar();
-  setTimeout("paleSomething.setDelayedNames();", 100);
+  setTimeout(paleSomething.setDelayedNames, 100);
  },
  setDelayedNames: function()
  {
-  try
-  {
-   paleSomething.updateTitlebar();
-   var myRegExp = new RegExp(paleSomething.DefaultName, "");
-   var strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
-   document.getElementById("aboutName").setAttribute("label", strAbout);
-  } catch(ex) { dump(ex + "\n"); }
+  if (paleSomething.DefaultAbout === null)
+   return;
+  paleSomething.updateTitlebar();
+  var myRegExp = new RegExp(paleSomething.DefaultName, "");
+  var strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
+  document.getElementById("aboutName").setAttribute("label", strAbout);
  },
  updateTitlebar: function()
  {
@@ -130,12 +130,12 @@ var paleSomething =
  {
   var arrWin = paleSomething._getOtherWindows();
   for (var i=0; i < arrWin.length; i++) {
-   try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { dump(ex + "\n"); }
+   try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { console.log(ex + "\n"); }
   }
  },
  _getOtherWindows: function()
  {
-  var hWin, arrWin = new Array();
+  var hWin, arrWin = [];
   var e = paleSomething._getWM().getEnumerator(null);
   while (e.hasMoreElements())
   {
@@ -161,7 +161,7 @@ var paleSomething =
   min = parseInt(min); max = parseInt(max);
   return Math.floor((max - min) * Math.random()) + min;
  }
-}
+};
 paleSomething.init();
 window.addEventListener("load", function() { paleSomething.init2(); }, false);
 window.addEventListener("unload", function() { paleSomething.destruct(); }, false);

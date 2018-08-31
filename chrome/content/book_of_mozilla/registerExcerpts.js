@@ -51,10 +51,10 @@ var AboutFireSomethingService = {
    compman.registerFactory(cid, "AboutFireSomethingService", contractid, AboutFireSomethingService.factory);
   }
  }
-}
+};
 
 // register
-try { AboutFireSomethingService.register(); } catch(ex) { dump(ex+"\n"); }
+AboutFireSomethingService.register();
 
 var AboutPaleSomethingService = {
  impl: {
@@ -108,7 +108,7 @@ var AboutPaleSomethingService = {
    compman.registerFactory(cid, "AboutPaleSomethingService", contractid, AboutPaleSomethingService.factory);
   }
  }
-}
+};
 
 // register
-try { AboutPaleSomethingService.register(); } catch(ex) { dump(ex+"\n"); }
+AboutPaleSomethingService.register();

@@ -8,28 +8,22 @@
 var paleSomething_PrefManager =
 {
  _domain: "extensions.palesomething",
+ _rootBranch: null,
+ _prefTypes: [],
  _getService: function()
  {
-  try
-  {
-   return Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-  } catch(ex) { dump(ex + "\n"); return null; }
+  return Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
  },
  _getInterface: function()
  {
-  try
-  {
-   return paleSomething_PrefManager._getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
-  } catch(ex) { dump(ex + "\n"); return null; }
+  return paleSomething_PrefManager._getService().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
  },
- _rootBranch: null,
  getRootBranch: function()
  {
   if (!paleSomething_PrefManager._rootBranch)
    paleSomething_PrefManager._rootBranch = paleSomething_PrefManager._getService().getBranch(null);
   return paleSomething_PrefManager._rootBranch;
  },
- _prefTypes: new Array(),
  getPrefType: function(strName)
  {
   if (strName in paleSomething_PrefManager._prefTypes)
@@ -54,32 +48,35 @@ var paleSomething_PrefManager =
  getPref: function(strName)
  {
   var strType = paleSomething_PrefManager.getPrefType(strName);
-  var strCode = 'paleSomething_PrefManager.getRootBranch().get' + strType + 'Pref("' + strName + '")';
-  if (strType == "Char")
-   strCode = 'paleSomething_PrefManager.getRootBranch().getComplexValue("' + strName + '", Components.interfaces.nsISupportsString).toString()';
-  try { return eval(strCode); } catch(ex) { dump(ex + "\n"); }
-  return null;
+  if (strType == 'Char')
+   return paleSomething_PrefManager.getRootBranch().getComplexValue(strName, Components.interfaces.nsISupportsString).toString();
+  else if (strType == 'Int')
+   return paleSomething_PrefManager.getRootBranch().getIntPref(strName);
+  else
+   return paleSomething_PrefManager.getRootBranch().getBoolPref(strName);
  },
  setPref: function(strName, varValue)
  {
   var strType = paleSomething_PrefManager.getPrefType(strName);
-  var strCode = 'paleSomething_PrefManager.getRootBranch().set' + strType + 'Pref("' + strName + '", ' + varValue + ')';
-  if (strType == "Char")
-   strCode = 'paleSomething_PrefManager.getRootBranch().setComplexValue("' + strName + '", Components.interfaces.nsISupportsString, "' + varValue + '").toString()';
-  try { eval(strCode); } catch(ex) { dump(ex + "\n"); }
+  if (strType == 'Char')
+   paleSomething_PrefManager.getRootBranch().setComplexValue(strName, Components.interfaces.nsISupportsString, varValue);
+  else if (strType == 'Int')
+   paleSomething_PrefManager.getRootBranch().setIntPref(strName, varValue);
+  else
+   paleSomething_PrefManager.getRootBranch().setBoolPref(strName, varValue);
  },
  addPrefObserver: function(strObserver, strDomain)
  {
   paleSomething_PrefManager.observer = strObserver;
   paleSomething_PrefManager.obsDomain = (strDomain == "root") ? "" : paleSomething_PrefManager._domain;
-  try { paleSomething_PrefManager._getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false); } catch(ex) { dump(ex + "\n"); }
+  paleSomething_PrefManager._getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false);
  },
  removePrefObserver: function()
  {
-  try { paleSomething_PrefManager._getInterface().removeObserver(paleSomething_PrefManager.obsDomain, this); } catch(ex) { dump(ex + "\n"); }
+  paleSomething_PrefManager._getInterface().removeObserver(paleSomething_PrefManager.obsDomain, this);
  },
  observe: function(subject, topic, prefName) 
  {
-  try { eval(paleSomething_PrefManager.observer + "(subject, topic, prefName);"); } catch(ex) { dump(ex + "\n"); }
+  paleSomething_PrefManager.observer(subject, topic, prefName);
  }
 };

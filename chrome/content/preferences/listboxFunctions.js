@@ -134,7 +134,7 @@ var paleSomething_Listbox =
  joinList: function(strID)
  {
   var cList = document.getElementById(strID).getElementsByTagName("listitem");
-  var arrOut = new Array();
+  var arrOut = [];
   for (var i=0; i < cList.length; i++)
   {
    try
