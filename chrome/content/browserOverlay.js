@@ -26,8 +26,19 @@ var paleSomething =
    var arrWin = paleSomething._getOtherWindows();
    if (arrWin.length > 0)
    {
-    var oFS = arrWin[0].paleSomething;
-    paleSomething.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);
+    var oFS = null;
+    for (var i=0; i < arrWin.length; i++)
+    {
+     if (arrWin[i].paleSomething !== undefined)
+     {
+      oFS = arrWin[i].paleSomething;
+      break;
+     }
+    }
+    if (oFS === null)
+     paleSomething.setNames();
+    else
+     paleSomething.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);
    }
    else
    {
@@ -130,6 +141,8 @@ var paleSomething =
  {
   var arrWin = paleSomething._getOtherWindows();
   for (var i=0; i < arrWin.length; i++) {
+   if (arrWin[i].paleSomething === undefined)
+    continue;
    try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { console.log(ex + "\n"); }
   }
  },
