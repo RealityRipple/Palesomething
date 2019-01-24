@@ -1,7 +1,7 @@
 // Firesomething extension for Mozilla Firefox
 // Copyright (C) 2004-2007  Michael O'Rourke / Cosmic Cat Creations (http://www.cosmicat.com/)
 // Palesomething update for Pale Moon
-// Written 2018  Andrew Sachen / RealityRipple Software (https://realityripple.com/)
+// Written 2018, 2019  Andrew Sachen / RealityRipple Software (https://realityripple.com/)
 // For licensing terms, please refer to readme.txt in this extension's XPInstall 
 // package or its installation directory on your computer.
 
