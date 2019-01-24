@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Palesomething</em:name>
   <em:id>{3B9A302B-BD28-5D2F-9C6A-5D0C6058A8AF}</em:id>
-  <em:version>2.5</em:version>
+  <em:version>2.6</em:version>
   <em:type>2</em:type>
   <!-- Pale Moon -->
   <em:targetApplication>
