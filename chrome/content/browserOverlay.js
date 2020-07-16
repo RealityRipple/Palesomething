@@ -113,13 +113,9 @@ var paleSomething =
   if (myWnd.hasAttribute("titlemodifier"))
   {
    if ((myWnd.hasAttribute("privatebrowsingmode") && (myWnd.getAttribute("privatebrowsingmode") == "temporary" || myWnd.getAttribute("privatebrowsingmode") == "permanent")) || (myWnd.hasAttribute("browsingmode") && myWnd.getAttribute("browsingmode") == "private"))
-   {
     myWnd.setAttribute("titlemodifier", paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
-   }
    else
-   {
     myWnd.setAttribute("titlemodifier", paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
-   }
   }
   paleSomething.updateTitlebar();
   setTimeout(paleSomething.setDelayedNames, 100);
@@ -140,7 +136,8 @@ var paleSomething =
  _updateOtherWindows: function()
  {
   var arrWin = paleSomething._getOtherWindows();
-  for (var i=0; i < arrWin.length; i++) {
+  for (var i=0; i < arrWin.length; i++)
+  {
    if (typeof arrWin[i].paleSomething === 'undefined')
     continue;
    try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { console.log(ex + "\n"); }
