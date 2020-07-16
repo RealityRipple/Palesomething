@@ -35,7 +35,7 @@ var paleSomething =
       break;
      }
     }
-    if (oFS === null)
+    if (oFS === null || !oFS.hasOwnProperty('Vendor') || !oFS.hasOwnProperty('ShortName') || !oFS.hasOwnProperty('TitleComment'))
      paleSomething.setNames();
     else
      paleSomething.setNewBrowserName(oFS.Vendor, oFS.ShortName, oFS.TitleComment);
