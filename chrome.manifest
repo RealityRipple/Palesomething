@@ -1,4 +1,4 @@
-content	palesomething				chrome/content/
-overlay	chrome://browser/content/browser.xul	chrome://palesomething/content/browserOverlay.xul
-locale	palesomething		en-US		chrome/locale/en-US/
-skin	palesomething		skin		chrome/skin/
+content palesomething       chrome/content/
+locale  palesomething en-US chrome/locale/en-US/
+skin    palesomething skin  chrome/skin/
+overlay chrome://browser/content/browser.xul chrome://palesomething/content/browserOverlay.xul

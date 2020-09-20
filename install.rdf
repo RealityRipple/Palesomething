@@ -1,5 +1,5 @@
-﻿<?xml version="1.0"?>
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
  <Description about="urn:mozilla:install-manifest">
   <em:name>Palesomething</em:name>
   <em:id>{3B9A302B-BD28-5D2F-9C6A-5D0C6058A8AF}</em:id>
@@ -19,7 +19,7 @@
   <em:iconURL>chrome://palesomething/skin/logo.png</em:iconURL>
   <em:icon64URL>chrome://palesomething/skin/logo64.png</em:icon64URL>
   <em:creator>RealityRipple</em:creator>
-  <em:contributor>Cosmic Cat Creations</em:contributor>
+  <em:developer>Cosmic Cat Creations</em:developer>
   <em:optionsURL>chrome://palesomething/content/preferences/prefwindow-Main.xul</em:optionsURL>
  </Description>
 </RDF>

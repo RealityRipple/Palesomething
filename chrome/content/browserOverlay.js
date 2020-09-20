@@ -10,24 +10,24 @@ var paleSomething =
  DefaultAbout: null,
  init: function()
  {
-  if (document.getElementById("main-window") != null)
+  if (document.getElementById('main-window') !== null)
   {
-   paleSomething.DefaultName = document.getElementById("main-window").getAttribute("title_normal");
-   paleSomething.PrivateName = document.getElementById("main-window").getAttribute("title_privatebrowsing");
+   paleSomething.DefaultName = document.getElementById('main-window').getAttribute('title_normal');
+   paleSomething.PrivateName = document.getElementById('main-window').getAttribute('title_privatebrowsing');
   }
   else
   {
-   paleSomething.DefaultName = "Unknown";
+   paleSomething.DefaultName = 'Unknown';
    paleSomething.PrivateName = paleSomething.DefaultName;
   }
-  var bSameName = paleSomething._getPref("extensions.palesomething.samename");
+  let bSameName = paleSomething._getPref('extensions.palesomething.samename');
   if (bSameName)
   {
-   var arrWin = paleSomething._getOtherWindows();
+   let arrWin = paleSomething._getOtherWindows();
    if (arrWin.length > 0)
    {
-    var oFS = null;
-    for (var i=0; i < arrWin.length; i++)
+    let oFS = null;
+    for (let i = 0; i < arrWin.length; i++)
     {
      if (typeof arrWin[i].paleSomething !== 'undefined')
      {
@@ -49,18 +49,18 @@ var paleSomething =
   {
    paleSomething.setNames();
   }
-  paleSomething_PrefManager.addPrefObserver("paleSomething.prefObserver");
+  paleSomething_PrefManager.addPrefObserver('paleSomething.prefObserver');
  },
  init2: function()
  {
-  if (document.getElementById("content") != null)
+  if (document.getElementById('content') !== null)
   {
-   document.getElementById("content").addEventListener("DOMTitleChanged", paleSomething.updateTitlebar, false);  // footnote "DOMTitle"
+   document.getElementById('content').addEventListener('DOMTitleChanged', paleSomething.updateTitlebar, false);  // footnote 'DOMTitle'
    paleSomething.updateTitlebar();
   }
-  if (document.getElementById("aboutName") != null)
+  if (document.getElementById('aboutName') !== null)
   {
-   paleSomething.DefaultAbout = document.getElementById("aboutName").getAttribute("label");
+   paleSomething.DefaultAbout = document.getElementById('aboutName').getAttribute('label');
    setTimeout(paleSomething.setDelayedNames, 100);
   }
  },
@@ -84,15 +84,15 @@ var paleSomething =
  },
  setNames: function()
  {
-  var bSameName = paleSomething._getPref("extensions.palesomething.samename");
-  var bTopWin = (window == paleSomething._getWM().getMostRecentWindow(null));
+  let bSameName = paleSomething._getPref('extensions.palesomething.samename');
+  let bTopWin = (window === paleSomething._getWM().getMostRecentWindow(null));
   if (bSameName && !bTopWin)
    return;
-  var vendor  = paleSomething._getRandomName("extensions.palesomething.lists.vendors");
-  var spacer  = paleSomething._getRandomName("extensions.palesomething.lists.spacers");
-  var prefix  = paleSomething._getRandomName("extensions.palesomething.lists.prefixes");
-  var suffix  = paleSomething._getRandomName("extensions.palesomething.lists.names");
-  var comment = paleSomething._getRandomName("extensions.palesomething.lists.comments");
+  let vendor  = paleSomething._getRandomName('extensions.palesomething.lists.vendors');
+  let spacer  = paleSomething._getRandomName('extensions.palesomething.lists.spacers');
+  let prefix  = paleSomething._getRandomName('extensions.palesomething.lists.prefixes');
+  let suffix  = paleSomething._getRandomName('extensions.palesomething.lists.names');
+  let comment = paleSomething._getRandomName('extensions.palesomething.lists.comments');
   paleSomething.setNewBrowserName(vendor + spacer, prefix + suffix, comment);
   if (bSameName)
    paleSomething._updateOtherWindows();
@@ -102,20 +102,20 @@ var paleSomething =
   paleSomething.Vendor = strVendor;
   paleSomething.ShortName = strShortName;
   paleSomething.TitleComment = strTitleComment;
-  var myRegExp = new RegExp(paleSomething.DefaultName, "");
-  var myWnd    = document.getElementById("main-window");
-  if (myWnd == null)
+  let myRegExp = new RegExp(paleSomething.DefaultName, '');
+  let myWnd    = document.getElementById('main-window');
+  if (myWnd === null)
    return;
-  if (myWnd.hasAttribute("titlemodifier_normal"))
-   myWnd.setAttribute("titlemodifier_normal", paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
-  if (myWnd.hasAttribute("titlemodifier_privatebrowsing"))
-   myWnd.setAttribute("titlemodifier_privatebrowsing", paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
-  if (myWnd.hasAttribute("titlemodifier"))
+  if (myWnd.hasAttribute('titlemodifier_normal'))
+   myWnd.setAttribute('titlemodifier_normal', paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+  if (myWnd.hasAttribute('titlemodifier_privatebrowsing'))
+   myWnd.setAttribute('titlemodifier_privatebrowsing', paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+  if (myWnd.hasAttribute('titlemodifier'))
   {
-   if ((myWnd.hasAttribute("privatebrowsingmode") && (myWnd.getAttribute("privatebrowsingmode") == "temporary" || myWnd.getAttribute("privatebrowsingmode") == "permanent")) || (myWnd.hasAttribute("browsingmode") && myWnd.getAttribute("browsingmode") == "private"))
-    myWnd.setAttribute("titlemodifier", paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+   if ((myWnd.hasAttribute('privatebrowsingmode') && (myWnd.getAttribute('privatebrowsingmode') === 'temporary' || myWnd.getAttribute('privatebrowsingmode') === 'permanent')) || (myWnd.hasAttribute('browsingmode') && myWnd.getAttribute('browsingmode') === 'private'))
+    myWnd.setAttribute('titlemodifier', paleSomething.PrivateName.replace(myRegExp, strVendor + strShortName + strTitleComment));
    else
-    myWnd.setAttribute("titlemodifier", paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
+    myWnd.setAttribute('titlemodifier', paleSomething.DefaultName.replace(myRegExp, strVendor + strShortName + strTitleComment));
   }
   paleSomething.updateTitlebar();
   setTimeout(paleSomething.setDelayedNames, 100);
@@ -125,45 +125,45 @@ var paleSomething =
   if (paleSomething.DefaultAbout === null)
    return;
   paleSomething.updateTitlebar();
-  var myRegExp = new RegExp(paleSomething.DefaultName, "");
-  var strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
-  document.getElementById("aboutName").setAttribute("label", strAbout);
+  let myRegExp = new RegExp(paleSomething.DefaultName, '');
+  let strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
+  document.getElementById('aboutName').setAttribute('label', strAbout);
  },
  updateTitlebar: function()
  {
-  try { document.getElementById("content").updateTitlebar(); } catch(ex) {}
+  try { document.getElementById('content').updateTitlebar(); } catch(ex) {}
  },
  _updateOtherWindows: function()
  {
-  var arrWin = paleSomething._getOtherWindows();
-  for (var i=0; i < arrWin.length; i++)
+  let arrWin = paleSomething._getOtherWindows();
+  for (let i = 0; i < arrWin.length; i++)
   {
    if (typeof arrWin[i].paleSomething === 'undefined')
     continue;
-   try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { console.log(ex + "\n"); }
+   try { arrWin[i].paleSomething.setNewBrowserName(paleSomething.Vendor, paleSomething.ShortName, paleSomething.TitleComment); } catch(ex) { console.log(ex + '\n'); }
   }
  },
  _getOtherWindows: function()
  {
-  var hWin, arrWin = [];
-  var e = paleSomething._getWM().getEnumerator(null);
+  let hWin, arrWin = [];
+  let e = paleSomething._getWM().getEnumerator(null);
   while (e.hasMoreElements())
   {
    hWin = e.getNext();
-   if (hWin == window)
+   if (hWin === window)
     continue;
-   if (hWin.document.getElementById("main-window"))
+   if (hWin.document.getElementById('main-window'))
     arrWin[arrWin.length] = hWin;
   }
   return arrWin;
  },
  _getWM: function()
  {
-  return Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+  return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
  },
  _getRandomName: function(strPref)
  {
-  var arrNames = paleSomething._getPref(strPref).split("|");
+  let arrNames = paleSomething._getPref(strPref).split('|');
   return arrNames[paleSomething._getRandom(0, arrNames.length - 1)];
  },
  _getRandom: function(min, max)
@@ -173,13 +173,13 @@ var paleSomething =
  }
 };
 paleSomething.init();
-window.addEventListener("load", function() { paleSomething.init2(); }, false);
-window.addEventListener("unload", function() { paleSomething.destruct(); }, false);
+window.addEventListener('load', function() { paleSomething.init2(); }, false);
+window.addEventListener('unload', function() { paleSomething.destruct(); }, false);
 
 /* *** FOOTNOTES ***
 
 DOMTitle: In some cases, tabbrowser::updateTitlebar() will update the title correctly but then it
  will revert to using the previous 'titlemodifier' upon loading a new page. Forcing an update
- with the "DOMTitleChanged" event seems to rememdy this behavior with minimal overhead.
+ with the 'DOMTitleChanged' event seems to rememdy this behavior with minimal overhead.
  
 */

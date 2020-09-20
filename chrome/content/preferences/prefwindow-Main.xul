@@ -94,32 +94,31 @@
  <script type="application/x-javascript"><![CDATA[
   function onAccept()
   {
-   document.getElementById("options-names-pane").writePreferences();
+   document.getElementById('options-names-pane').writePreferences();
    return true;
   }
   var listInitialized = new Array();
   function convertPrefToList(strListboxID)
   {
    if (listInitialized[strListboxID])
-    return "";
-   var hListbox = document.getElementById(strListboxID);
-   var strPrefList = document.getElementById(hListbox.getAttribute("preference")).value;
-   if (strPrefList == "")
-    return "";
+    return '';
+   let hListbox = document.getElementById(strListboxID);
+   let strPrefList = document.getElementById(hListbox.getAttribute('preference')).value;
+   if (strPrefList == '')
+    return '';
    listInitialized[strListboxID] = true;
-   var arrItems = strPrefList.split("|").sort(paleSomething_Listbox.caseInsensitiveSort);
-   var oItem;
-   for (var i=0; i < arrItems.length; i++)
+   let arrItems = strPrefList.split('|').sort(paleSomething_Listbox.caseInsensitiveSort);
+   for (let i=0; i < arrItems.length; i++)
    {
-    if (arrItems[i] != "")
+    if (arrItems[i] != '')
     {
-     oItem = hListbox.appendItem(arrItems[i], arrItems[i]);
+     let oItem = hListbox.appendItem(arrItems[i], arrItems[i]);
      if (i < 7)
       hListbox.ensureIndexIsVisible(oItem); // workaround for painting bug
     }
    }
-   hListbox.addEventListener("keypress", processListboxKeypress, true);
-   return "";
+   hListbox.addEventListener('keypress', processListboxKeypress, true);
+   return '';
   }
   function convertListToPref(strID)
   {

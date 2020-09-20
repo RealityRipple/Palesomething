@@ -20,13 +20,13 @@ var paleSomething_Listbox =
  },
  addListitem: function(strListID, strTextboxID)
  {
-  var hTextbox = document.getElementById(strTextboxID);
-  var hListbox = document.getElementById(strListID);
-  var oItem;
-  if (hTextbox.value != "")
+  let hTextbox = document.getElementById(strTextboxID);
+  let hListbox = document.getElementById(strListID);
+  if (hTextbox.value != '')
   {
    hListbox.clearSelection();
-   var index = paleSomething_Listbox._findAlphaInsertionPoint(hListbox, hTextbox.value);
+   let index = paleSomething_Listbox._findAlphaInsertionPoint(hListbox, hTextbox.value);
+   let oItem;
    if (index >= 0)
     oItem = hListbox.insertItemAt(index, hTextbox.value, hTextbox.value);
    else
@@ -35,20 +35,20 @@ var paleSomething_Listbox =
    hListbox.selectItem(oItem);
    hListbox.doCommand();
   }
-  hTextbox.value = "";
+  hTextbox.value = '';
   hTextbox.focus();
  },
  _centerListitem: function(hListbox, oItem)
  {
-  var i, oTemp = oItem;
-  for (i=0; i < 3; i++)
+  let oTemp = oItem;
+  for (let i = 0; i < 3; i++)
   {
    if (hListbox.getPreviousItem(oTemp, 1))
     oTemp = hListbox.getPreviousItem(oTemp, 1);
   }
   hListbox.ensureElementIsVisible(oTemp);
   oTemp = oItem;
-  for (i=0; i < 3; i++)
+  for (let i = 0; i < 3; i++)
   {
    if (hListbox.getNextItem(oTemp, 1))
     oTemp = hListbox.getNextItem(oTemp, 1);
@@ -60,15 +60,15 @@ var paleSomething_Listbox =
   if (!hListbox.lastChild)
    return -1;
   strValue = strValue.toUpperCase();
-  var oTemp, i = 0, dir = 1;
-  var nLast = hListbox.getIndexOfItem(hListbox.lastChild);
+  let oTemp, i = 0, dir = 1;
+  let nLast = hListbox.getIndexOfItem(hListbox.lastChild);
   if (nLast > 6)
   {
-   var interval = (nLast / 2);
+   let interval = (nLast / 2);
    while (interval > 4)
    {
     i += (interval * dir);
-    dir = (strValue > hListbox.getItemAtIndex(Math.round(i)).getAttribute("value").toUpperCase()) ? 1 : -1;
+    dir = (strValue > hListbox.getItemAtIndex(Math.round(i)).getAttribute('value').toUpperCase()) ? 1 : -1;
     interval /= 2;
    }
    i = Math.round(i);
@@ -78,7 +78,7 @@ var paleSomething_Listbox =
   {
    while (oTemp)
    {
-    if (strValue <= oTemp.getAttribute("value").toUpperCase())
+    if (strValue <= oTemp.getAttribute('value').toUpperCase())
      return i;
     else
      i++;
@@ -90,7 +90,7 @@ var paleSomething_Listbox =
   {
    while (oTemp)
    {
-    if (strValue > oTemp.getAttribute("value").toUpperCase()) 
+    if (strValue > oTemp.getAttribute('value').toUpperCase()) 
      return (i + 1);
     else
      i--;
@@ -101,30 +101,32 @@ var paleSomething_Listbox =
  },
  deleteListitems: function(event)
  {
-  var hListbox = paleSomething_Listbox._getListbox(event);
+  let hListbox = paleSomething_Listbox._getListbox(event);
   if (!hListbox)
    return;
   while (hListbox.selectedCount)
+  {
    hListbox.removeItemAt(hListbox.getIndexOfItem(hListbox.getSelectedItem(0)));
+  }
   hListbox.doCommand();
  },
  selectAllListitems: function(event)
  {
-  var hListbox = paleSomething_Listbox._getListbox(event);
+  let hListbox = paleSomething_Listbox._getListbox(event);
   if (!hListbox)
    return;
   hListbox.selectAll();
  },
  _getListbox: function(event)
  {
-  var hListbox;
+  let hListbox;
   switch (event.target.nodeName)
   {
-   case "listbox":
+   case 'listbox':
     hListbox = event.target;
     break;
-   case "menuitem":
-    hListbox = (document.popupNode.nodeName == "listitem") ? document.popupNode.parentNode : document.popupNode;
+   case 'menuitem':
+    hListbox = (document.popupNode.nodeName == 'listitem') ? document.popupNode.parentNode : document.popupNode;
     break;
    default: 
     return null;
@@ -133,15 +135,15 @@ var paleSomething_Listbox =
  },
  joinList: function(strID)
  {
-  var cList = document.getElementById(strID).getElementsByTagName("listitem");
-  var arrOut = [];
-  for (var i=0; i < cList.length; i++)
+  let cList = document.getElementById(strID).getElementsByTagName('listitem');
+  let arrOut = [];
+  for (let i = 0; i < cList.length; i++)
   {
    try
    {
     arrOut[i] = cList[i].value;
    } catch(ex) {}
   }
-  return arrOut.join("|");
+  return arrOut.join('|');
  }
 };

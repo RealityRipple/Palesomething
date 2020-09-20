@@ -7,12 +7,12 @@
 
 var paleSomething_PrefManager =
 {
- _domain: "extensions.palesomething",
+ _domain: 'extensions.palesomething',
  _rootBranch: null,
  _prefTypes: [],
  _getService: function()
  {
-  return Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+  return Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService);
  },
  _getInterface: function()
  {
@@ -28,18 +28,18 @@ var paleSomething_PrefManager =
  {
   if (strName in paleSomething_PrefManager._prefTypes)
    return paleSomething_PrefManager._prefTypes[strName];
-  var strType = "Char";
-  var iPB = Components.interfaces.nsIPrefBranch;
+  let strType = 'Char';
+  let iPB = Components.interfaces.nsIPrefBranch;
   switch (paleSomething_PrefManager.getRootBranch().getPrefType(strName))
   {
    case iPB.PREF_STRING:
-    strType = "Char";
+    strType = 'Char';
     break;
    case iPB.PREF_INT:
-    strType = "Int";
+    strType = 'Int';
     break;
    case iPB.PREF_BOOL:
-    strType = "Bool";
+    strType = 'Bool';
     break;
   }
   paleSomething_PrefManager._prefTypes[strName] = strType;
@@ -47,20 +47,20 @@ var paleSomething_PrefManager =
  },
  getPref: function(strName)
  {
-  var strType = paleSomething_PrefManager.getPrefType(strName);
-  if (strType == 'Char')
+  let strType = paleSomething_PrefManager.getPrefType(strName);
+  if (strType === 'Char')
    return paleSomething_PrefManager.getRootBranch().getComplexValue(strName, Components.interfaces.nsISupportsString).toString();
-  else if (strType == 'Int')
+  else if (strType === 'Int')
    return paleSomething_PrefManager.getRootBranch().getIntPref(strName);
   else
    return paleSomething_PrefManager.getRootBranch().getBoolPref(strName);
  },
  setPref: function(strName, varValue)
  {
-  var strType = paleSomething_PrefManager.getPrefType(strName);
-  if (strType == 'Char')
+  let strType = paleSomething_PrefManager.getPrefType(strName);
+  if (strType === 'Char')
    paleSomething_PrefManager.getRootBranch().setComplexValue(strName, Components.interfaces.nsISupportsString, varValue);
-  else if (strType == 'Int')
+  else if (strType === 'Int')
    paleSomething_PrefManager.getRootBranch().setIntPref(strName, varValue);
   else
    paleSomething_PrefManager.getRootBranch().setBoolPref(strName, varValue);
@@ -68,7 +68,7 @@ var paleSomething_PrefManager =
  addPrefObserver: function(strObserver, strDomain)
  {
   paleSomething_PrefManager.observer = strObserver;
-  paleSomething_PrefManager.obsDomain = (strDomain == "root") ? "" : paleSomething_PrefManager._domain;
+  paleSomething_PrefManager.obsDomain = (strDomain === 'root') ? '' : paleSomething_PrefManager._domain;
   paleSomething_PrefManager._getInterface().addObserver(paleSomething_PrefManager.obsDomain, this, false);
  },
  removePrefObserver: function()
