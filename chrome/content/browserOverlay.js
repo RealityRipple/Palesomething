@@ -63,6 +63,11 @@ var paleSomething =
    paleSomething.DefaultAbout = document.getElementById('aboutName').getAttribute('label');
    setTimeout(paleSomething.setDelayedNames, 100);
   }
+  else if (document.getElementById('appmenu_about') !== null)
+  {
+   paleSomething.DefaultAbout = document.getElementById('appmenu_about').getAttribute('label');
+   setTimeout(paleSomething.setDelayedNames, 100);
+  }
  },
  destruct: function()
  {
@@ -127,7 +132,10 @@ var paleSomething =
   paleSomething.updateTitlebar();
   let myRegExp = new RegExp(paleSomething.DefaultName, '');
   let strAbout = paleSomething.DefaultAbout.replace(myRegExp, paleSomething.Vendor + paleSomething.ShortName);
-  document.getElementById('aboutName').setAttribute('label', strAbout);
+  if (document.getElementById('aboutName') !== null)
+   document.getElementById('aboutName').setAttribute('label', strAbout);
+  if (document.getElementById('appmenu_about') !== null)
+   document.getElementById('appmenu_about').setAttribute('label', strAbout);
  },
  updateTitlebar: function()
  {
